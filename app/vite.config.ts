@@ -10,6 +10,12 @@ export default defineConfig({
   publicDir: 'src/views/public',
   build: {
     minify: true,
+    rollupOptions: {
+      input: {
+        home: 'index.html',
+        console: 'console/index.html',
+      },
+    },
   },
   css: {
     preprocessorOptions: {

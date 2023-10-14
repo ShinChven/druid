@@ -38,9 +38,19 @@ export async function viteSSRMiddleware(app: Application) {
   const vite = await createViteServer();
 
   app.use('*', async (req: Request, res: Response, next: NextFunction) => {
+
+
+
     try {
       const url = req.originalUrl;
       let template, render;
+      if (!isProd) {
+        if (req.baseUrl === '/console' || req.baseUrl.startsWith('/console/')) {
+          template = fs.readFileSync(path.resolve('console/index.html'), 'utf-8');
+          template = await vite!.transformIndexHtml(url, template);
+          return res.status(200).set({ 'Content-Type': 'text/html' }).end(template);
+        }
+      }
       if (!isProd) {
         template = fs.readFileSync(path.resolve('index.html'), 'utf-8');
         template = await vite!.transformIndexHtml(url, template);
