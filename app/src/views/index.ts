@@ -44,10 +44,13 @@ export async function viteSSRMiddleware(app: Application) {
     try {
       const url = req.originalUrl;
       let template, render;
-      if (!isProd) {
-        if (req.baseUrl === '/console' || req.baseUrl.startsWith('/console/')) {
+      if (req.baseUrl === '/console' || req.baseUrl.startsWith('/console/')) {
+        if (!isProd) {
           template = fs.readFileSync(path.resolve('console/index.html'), 'utf-8');
           template = await vite!.transformIndexHtml(url, template);
+          return res.status(200).set({ 'Content-Type': 'text/html' }).end(template);
+        }else{
+          template = fs.readFileSync(path.resolve('public/console/index.html'), 'utf-8');
           return res.status(200).set({ 'Content-Type': 'text/html' }).end(template);
         }
       }

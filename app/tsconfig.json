@@ -13,6 +13,7 @@
     "esModuleInterop": true,
     "sourceMap": false,
     "allowJs": true,
+    "skipLibCheck": true,
     "jsx": "react-jsx"
   },
   "include": [
