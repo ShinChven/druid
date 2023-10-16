@@ -13,7 +13,6 @@ const App = () => {
           <ProLayout
             title={appLocales.title}
             logo='/vite.svg'
-            headerRender={false}
             menuDataRender={() => routes}
             menuItemRender={(item, dom) => {
               return (
