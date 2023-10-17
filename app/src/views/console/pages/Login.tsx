@@ -2,12 +2,15 @@ import { ProForm } from '@ant-design/pro-components';
 import { ProFormText } from '@ant-design/pro-form';
 import { Button, Card, message } from 'antd';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { appLocales } from '../config/locales';
-import { IAuthenticationResponse, authenticate } from '../services/authentication';
+import { IAuthenticationResponse, authenticate, useAuthentication } from '../services/authentication';
 import styles from './Login.module.less';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
+  const { admin, setAdmin } = useAuthentication();
+  const navigate = useNavigate();
 
   const handleSubmit = async (values: any) => {
     setLoading(true);
@@ -16,7 +19,9 @@ const Login = () => {
         strategy: 'local',
         ...values,
       }) as IAuthenticationResponse;
-      console.log(resp.accessToken);
+      setAdmin(resp.admin);
+      message.success('Login success');
+      navigate('/console/');
     } catch (err) {
       console.error(err);
       message.error('Login failed')
@@ -57,3 +62,7 @@ const Login = () => {
 };
 
 export default Login;
+function useAuth(): { admin: any; setAdmin: any; } {
+  throw new Error('Function not implemented.');
+}
+

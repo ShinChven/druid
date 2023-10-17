@@ -1,5 +1,5 @@
 import { AdminModel } from "../../../orm/declarations/admins";
-import client, { ErrorResponse, } from "./client";
+import client, { ErrorResponse } from "./client";
 
 interface AuthenticationPayload {
   iat: number;
@@ -19,7 +19,7 @@ export interface Authentication {
 export type IAuthenticationResponse = {
   accessToken?: string;
   authentication?: Authentication;
-  admin?: AdminModel;
+  admin?: AdminModel | null;
   code?: number;
   message?: string;
 }
@@ -42,4 +42,15 @@ export const reAuthenticate = async () => client.reAuthenticate();
 export const logout = async () => {
   return client.logout();
 }
+
+let _admin: AdminModel | undefined | null = null;
+
+const setAdmin = (admin?: AdminModel | null) => {
+  _admin = admin;
+};
+
+export const useAuthentication = () => {
+  return { admin: _admin, setAdmin };
+}
+
 
