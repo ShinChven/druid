@@ -47,7 +47,7 @@ const App = () => {
         navigate('/console/login');
       }
     })();
-  }, [location.pathname, admin, navigate]);
+  }, [location.pathname]);
 
   if (!admin && !loginExcludedPaths.includes(location.pathname)) {
     // If this condition is met, the useEffect will navigate away before rendering anything else
