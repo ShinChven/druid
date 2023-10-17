@@ -1,11 +1,11 @@
-import React, { useState } from "react"
+import React from "react"
 import { Helmet } from "react-helmet"
 import { Link } from "react-router-dom"
 import { useData } from "../context"
 import styles from "./Home.module.less"
 
 const Home: React.FC = () => {
-  const [data, setData] = useState(useData() as any);
+  const data = useData() as any;
   return <div className={styles.container}>
     <Helmet>
       <title>{data?.title}</title>

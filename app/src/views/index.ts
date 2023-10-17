@@ -49,7 +49,7 @@ export async function viteSSRMiddleware(app: Application) {
           template = fs.readFileSync(path.resolve('console/index.html'), 'utf-8');
           template = await vite!.transformIndexHtml(url, template);
           return res.status(200).set({ 'Content-Type': 'text/html' }).end(template);
-        }else{
+        } else {
           template = fs.readFileSync(path.resolve('public/console/index.html'), 'utf-8');
           return res.status(200).set({ 'Content-Type': 'text/html' }).end(template);
         }
@@ -74,7 +74,11 @@ export async function viteSSRMiddleware(app: Application) {
         ${helmet?.link?.toString()}`;
       const script = `<script>window.__INITIAL_DATA__ = ${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
       if (appHtml !== undefined) {
-        let html = template.replace(`<!--app-html-->`, appHtml).replace(`<!--initial-data-->`, script);
+        let html = template
+          .replace(`<!--app-html-->`, appHtml)
+          .replace(`<!--initial-data-->`, script)
+          .replace(`<!-- -->`, '');
+        ;
         if (helmetString) {
           html = html.replace(`<!--helmet-->`, helmetString);
         }
