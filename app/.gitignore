@@ -5,6 +5,8 @@ lib/
 /src/ssr/
 
 test/config.json
+config/development.json
+config/production.json
 
 *.sqlite
 

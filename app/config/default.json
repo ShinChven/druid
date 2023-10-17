@@ -8,5 +8,47 @@
   "paginate": {
     "default": 10,
     "max": 50
+  },
+  "mysql": {
+    "client": "mysql2",
+    "connection": {
+      "host": "127.0.0.1",
+      "port": 3306,
+      "user": "druid",
+      "password": "Your_Database_Password_Here",
+      "database": "druid",
+      "charset": "utf8mb4",
+      "dateStrings": true
+    }
+  },
+  "auth/admin": {
+    "entity": "admin",
+    "service": "/api/admins",
+    "secret": "WJfCx6l0DsCdsRNYUA2TYDzyFHan5XeO",
+    "authStrategies": [
+      "jwt",
+      "local"
+    ],
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "usernameField": "username",
+      "passwordField": "password"
+    }
+  },
+  "init": {
+    "admin": {
+      "username": "admin@example.com",
+      "password": "your_password_here",
+      "access": [
+        "console:admins"
+      ]
+    }
   }
 }

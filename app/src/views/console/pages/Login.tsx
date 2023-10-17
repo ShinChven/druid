@@ -1,8 +1,9 @@
 import { ProForm } from '@ant-design/pro-components';
 import { ProFormText } from '@ant-design/pro-form';
-import { Button, Card } from 'antd';
+import { Button, Card, message } from 'antd';
 import { useState } from 'react';
 import { appLocales } from '../config/locales';
+import { IAuthenticationResponse, authenticate } from '../services/authentication';
 import styles from './Login.module.less';
 
 const Login = () => {
@@ -10,7 +11,16 @@ const Login = () => {
 
   const handleSubmit = async (values: any) => {
     setLoading(true);
-    // Perform login logic here
+    try {
+      const resp = await authenticate({
+        strategy: 'local',
+        ...values,
+      }) as IAuthenticationResponse;
+      console.log(resp.accessToken);
+    } catch (err) {
+      console.error(err);
+      message.error('Login failed')
+    }
     setLoading(false);
   };
 
@@ -19,6 +29,7 @@ const Login = () => {
       <h1>{appLocales.title}</h1>
       <Card title='Login'>
         <ProForm
+          loading={loading}
           submitter={false}
           layout='horizontal'
           labelCol={{ span: 8 }}

@@ -14,9 +14,12 @@ import socketio from '@feathersjs/socketio'
 
 import type { Application } from './declarations'
 
+import { authentication } from './auth'
 import { channels } from './channels'
 import { logError } from './hooks/log-error'
+import { setupKnex } from './knex'
 import { logger } from './logger'
+import { setupORM } from './orm'
 import { services } from './services/index'
 import { viteSSRMiddleware } from './views/index'
 
@@ -42,8 +45,17 @@ export async function createApp() {
       }
     })
   )
+
+  // Configure Knex
+  app.configure(setupKnex)
+
+  // Configure orm
+  await setupORM(app);
+
   app.configure(services)
   app.configure(channels)
+
+  app.configure(authentication)
 
   // Configure a middleware for 404s and the error handler
   app.use(notFound())
