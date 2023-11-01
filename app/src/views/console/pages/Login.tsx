@@ -64,7 +64,3 @@ const Login = () => {
 };
 
 export default Login;
-function useAuth(): { admin: any; setAdmin: any; } {
-  throw new Error('Function not implemented.');
-}
-

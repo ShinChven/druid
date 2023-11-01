@@ -62,10 +62,24 @@ const App = () => {
           <ProLayout
             title={appLocales.title}
             logo='/vite.svg'
+            headerRender={false}
             menuDataRender={() => routes}
             menuItemRender={(item, dom) => (
               <Link to={item.path as string}>{dom}</Link>
             )}
+            menuFooterRender={(props) => {
+              if (props?.collapsed) return undefined;
+              return (
+                <p
+                  style={{
+                    textAlign: 'center',
+                    paddingBlockStart: 12,
+                  }}
+                >
+                  Power by Druid
+                </p>
+              );
+            }}
           >
             {element}
           </ProLayout>
