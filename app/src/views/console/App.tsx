@@ -2,9 +2,10 @@ import ProLayout from '@ant-design/pro-layout';
 import { Spin } from 'antd';
 import { useEffect, useState } from 'react';
 import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { useConsoleData } from './ConsoleContext';
 import { appLocales } from './config/locales';
 import routes from "./routes";
-import { reAuthenticate, useAuthentication } from './services/authentication';
+import { reAuthenticate } from './services/authentication';
 import { authStorageKey } from './services/client';
 
 const loginExcludedPaths = ['/console/login', '/console/register'];
@@ -26,7 +27,7 @@ const App = () => {
   const [action, setAction] = useState<number>(0);
   const location = useLocation();
   const navigate = useNavigate();
-  const { admin, setAdmin } = useAuthentication();
+  const { admin, setAdmin } = useConsoleData();
 
   useEffect(() => {
     (async () => {

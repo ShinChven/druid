@@ -19,7 +19,7 @@ export interface Authentication {
 export type IAuthenticationResponse = {
   accessToken?: string;
   authentication?: Authentication;
-  admin?: AdminModel | null;
+  admin?: AdminModel;
   code?: number;
   message?: string;
 }
@@ -43,14 +43,5 @@ export const logout = async () => {
   return client.logout();
 }
 
-let _admin: AdminModel | undefined | null = null;
-
-const setAdmin = (admin?: AdminModel | null) => {
-  _admin = admin;
-};
-
-export const useAuthentication = () => {
-  return { admin: _admin, setAdmin };
-}
 
 

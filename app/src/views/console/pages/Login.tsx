@@ -3,13 +3,15 @@ import { ProFormText } from '@ant-design/pro-form';
 import { Button, Card, message } from 'antd';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useConsoleData } from '../ConsoleContext';
 import { appLocales } from '../config/locales';
-import { IAuthenticationResponse, authenticate, useAuthentication } from '../services/authentication';
+import { IAuthenticationResponse, authenticate } from '../services/authentication';
 import styles from './Login.module.less';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
-  const { admin, setAdmin } = useAuthentication();
+
+  const { admin, setAdmin } = useConsoleData();
   const navigate = useNavigate();
 
   const handleSubmit = async (values: any) => {
