@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import App from './App';
 import { ConsoleContextProvider } from './ConsoleContext';
+import './global.less';
 
 ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
