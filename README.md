@@ -57,3 +57,11 @@ Whenever you modify the server's `.ts` or `.js` files, the Feathers server will 
 If you modify the client's `.tsx` files, HMR will be triggered to update the changes seamlessly.
 
 **Note**: Ensure that you place `.tsx` files exclusively within the `views` folder. Modifying `.ts` files outside this directory will lead to a complete server restart, bypassing the HMR process.
+
+## Trouble Shooting
+
+### React Component Rendered Twice?
+
+This happens in development mode if the app is wrapped in a `<React.StrictMode>` component. Remove it to fix the issue.
+
+Please go the entry file to remove it.
