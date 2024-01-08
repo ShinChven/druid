@@ -7,15 +7,18 @@ import App from './App';
 import { ConsoleContextProvider } from './ConsoleContext';
 import './global.less';
 
+const strict = true;
+
+const RootComponent = strict ? React.StrictMode : React.Fragment;
+
 ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 ).render(
-  <React.StrictMode>
+  <RootComponent>
     <BrowserRouter>
       <ConsoleContextProvider>
         <App />
       </ConsoleContextProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  </RootComponent>
 );
-
