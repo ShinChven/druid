@@ -25,6 +25,8 @@ jobs:
           mv app druid
           cd druid
           tar -czvf druid.tar.gz .  # Create a compressed archive
+          pwd
+          ls -lh
 
       - name: Upload Package Artifact
         uses: actions/upload-artifact@v3
