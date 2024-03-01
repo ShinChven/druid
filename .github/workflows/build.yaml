@@ -2,19 +2,32 @@ name: Build
 
 on: 
   push:
-    branches: [ main ]  # Adjust the branch name if needed
+    branches: [ main ]  
   pull_request:
     branches: [ main ]
 
 jobs:
-  build_and_test:
+  build_test_package:
     runs-on: ubuntu-latest  
-    container: shinchven/node:20-build  # Use your custom image
+    container: shinchven/node:20-build 
 
     steps:
-      - uses: actions/checkout@v3  # Check out the repository 
+      - uses: actions/checkout@v3
       - name: Build and Release
         run: |
-          cd app  # Move into the 'app' directory
+          cd app  
           npm install
           npm run release
+          rm -rf node_modules  # Remove node_modules
+
+      - name: Create Package Archive
+        run: |
+          mv app druid
+          cd druid
+          tar -czvf druid.tar.gz .  # Create a compressed archive
+
+      - name: Upload Package Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: druid-package
+          path: druid.tar.gz
