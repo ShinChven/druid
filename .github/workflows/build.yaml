@@ -19,12 +19,12 @@ jobs:
           npm install
           npm run release
           rm -rf node_modules  # Remove node_modules
+          cd ..
 
       - name: Create Package Archive
         run: |
           mv app druid
-          cd druid
-          tar -czvf druid.tar.gz .  # Create a compressed archive
+          tar -cvzf druid.tar.gz druid 
           pwd
           ls -lh
 
