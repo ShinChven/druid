@@ -31,5 +31,5 @@ jobs:
       - name: Upload Package Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: druid-package
+          name: druid
           path: druid.tar.gz
