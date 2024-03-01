@@ -63,9 +63,10 @@ export async function viteSSRMiddleware(app: Application) {
         render = (await import('../ssr/server.mjs')).renderHtml as unknown as RenderHtml;
       }
       const data = {
-        title: 'hello vite ssr',
+        title: 'Druid Scaffolding',
         url,
-        description: 'hello vite ssr',
+        description: 'It works! You are seeing a message rendered from the server.',
+        message: 'Button on the left is a client-side route link. Button on the right is a server-side route link.'
       }
       const rendered = await render(url, data);
       const { appHtml, helmet } = rendered ?? {};

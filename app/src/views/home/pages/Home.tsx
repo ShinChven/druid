@@ -12,9 +12,10 @@ const Home: React.FC = () => {
       <meta name="description" content={data?.description} />
     </Helmet>
     <h1>Hello World</h1>
-    <Link to="/about">About Us</Link>
-    <p>url: {data?.url}</p>
-    <p>{JSON.stringify(data)}</p>
+    <div>{data?.description}</div>
+    <div>{data?.message}</div>
+    <p> <Link to="/about">About</Link> | <a href='/console'>Console</a></p>
+    <a href='https://github.com/ShinChven/druid' target="_blank">GitHub</a>
   </div>
 }
 

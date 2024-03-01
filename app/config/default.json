@@ -24,7 +24,7 @@
   "auth/admin": {
     "entity": "admin",
     "service": "/api/admins",
-    "secret": "WJfCx6l0DsCdsRNYUA2TYDzyFHan5XeO",
+    "secret": "Your_Secret_Here",
     "authStrategies": [
       "jwt",
       "local"
