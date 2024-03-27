@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Helmet } from "react-helmet"
 import { Link } from "react-router-dom"
 import { useData } from "../context"
@@ -6,7 +6,23 @@ import styles from "./Home.module.less"
 
 const Home: React.FC = () => {
   const data = useData() as any;
-  return <div className={styles.container}>
+
+
+  // Safari Compatibility
+  const [isSafari, setIsSafari] = useState(false);
+
+  useEffect(() => {
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    setIsSafari(isSafari);
+  }, []);
+
+  const containerClass = [styles.container];
+  if (isSafari) {
+    containerClass.push(styles.safari_container);
+  }
+
+
+  return <div className={containerClass.join(' ')}>
     <Helmet>
       <title>{data?.title}</title>
       <meta name="description" content={data?.description} />
