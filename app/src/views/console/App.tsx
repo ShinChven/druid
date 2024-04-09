@@ -10,8 +10,19 @@ import { appLocales } from './config/locales';
 import routes, { getAccessibleMenu, menuRoutes } from "./routes";
 import { reAuthenticate } from './services/authentication';
 import { authStorageKey } from './services/client';
+import enUS from 'antd/locale/en_US';
 
 const loginExcludedPaths = ['/console/login', '/console/register'];
+
+const locale = {
+  // Set the language to English.
+  locale: 'en-US',
+  // Customize the language strings.
+  messages: {
+    // Example: Customize the text for the "OK" button.
+    okText: 'OK',
+  },
+};
 
 
 const App = () => {
@@ -57,6 +68,7 @@ const App = () => {
           borderRadius: 2,
         },
       }}
+      locale={enUS}
     >
       <Routes>
         {routes.map((route) => {

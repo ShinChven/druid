@@ -7,7 +7,7 @@ import App from './App';
 import { ConsoleContextProvider } from './ConsoleContext';
 import './global.less';
 
-const strict = true;
+const strict = false;
 
 const RootComponent = strict ? React.StrictMode : React.Fragment;
 
