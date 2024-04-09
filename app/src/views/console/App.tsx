@@ -14,17 +14,6 @@ import enUS from 'antd/locale/en_US';
 
 const loginExcludedPaths = ['/console/login', '/console/register'];
 
-const locale = {
-  // Set the language to English.
-  locale: 'en-US',
-  // Customize the language strings.
-  messages: {
-    // Example: Customize the text for the "OK" button.
-    okText: 'OK',
-  },
-};
-
-
 const App = () => {
   const [action, setAction] = useState<number>(0);
   const location = useLocation();
