@@ -19,48 +19,41 @@ const model: ServiceModel = {
       length: 100,
       nullable: false,
       unique: true,
-      comment: '用户名',
+      comment: 'Username',
     },
     name: {
       type: DataTypes.VARCHAR,
       length: 32,
       nullable: true,
-      comment: '名称',
-    },
-    code: {
-      type: DataTypes.VARCHAR,
-      length: 100,
-      nullable: true,
-      unique: true,
-      comment: '用户编号',
+      comment: 'Name',
     },
     email: {
       type: DataTypes.VARCHAR,
       length: 32,
       nullable: true,
-      comment: '电子邮箱'
+      comment: 'Email'
     },
     mobile: {
       type: DataTypes.VARCHAR,
       length: 32,
       nullable: true,
-      comment: '手机号'
+      comment: 'Mobile phone number'
     },
     password: {
       type: DataTypes.VARCHAR,
       length: 200,
       nullable: true,
-      comment: '密码'
+      comment: 'Password'
     },
     access: {
       type: DataTypes.JSON,
-      comment: '用户权限',
+      comment: 'Privileges to system resources',
     },
     state: {
       type: DataTypes.INT,
       nullable: false,
       defaultValue: 1,
-      comment: '状态：0-禁用，1-启用'
+      comment: 'Status: 0 - Disabled, 1 - Enabled'
     }
   }
 };
