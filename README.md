@@ -2,7 +2,9 @@
 
 A TypeScript full-stack web application scaffolding with [multi-page application support](https://vitejs.dev/guide/build.html#multi-page-app), powered by [FeathersJS](https://feathersjs.com/).
 
-Server, home page, and console page unified in one project.
+Server, home page, and console page unified in one project. 
+
+Forget about mocking data while developing front-end application. Druid provides a full-stack development environment with a real database. 
 
 ## 🛠️ Preparation
 
