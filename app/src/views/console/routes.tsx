@@ -62,14 +62,15 @@ export function getAccessibleMenu(routes: Array<MenuDataItem>, adminAccess: Arra
     // Check if the current route is accessible
     const isAccessible = !route.access || adminAccess.includes(route.access);
 
-    // Process children recursively
-    if (route.children) {
-      route.children = getAccessibleMenu(route.children, adminAccess);
-    }
+    // Process children recursively, creating new objects
+    const accessibleChildren = route.children
+      ? getAccessibleMenu(route.children, adminAccess)
+      : [];
 
     // If the route is accessible and has element or has any accessible children, add it to the result
-    if (isAccessible && (route.element || (route.children && route.children.length > 0))) {
-      acc.push(route);
+    if (isAccessible && (route.element || accessibleChildren.length > 0)) {
+      // Create a new object to avoid modifying the original
+      acc.push({ ...route, children: accessibleChildren }); 
     }
 
     return acc;
