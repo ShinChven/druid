@@ -4,6 +4,8 @@ lib/
 /public/
 /src/ssr/
 
+!.vscode/launch.json
+
 test/config.json
 config/development.json
 config/production.json

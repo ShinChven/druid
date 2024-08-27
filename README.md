@@ -2,7 +2,9 @@
 
 A TypeScript full-stack web application scaffolding with [multi-page application support](https://vitejs.dev/guide/build.html#multi-page-app), powered by [FeathersJS](https://feathersjs.com/).
 
-Server, home page, and console page unified in one project.
+Server, home page, and console page unified in one project. 
+
+Forget about mocking data while developing front-end application. Druid provides a full-stack development environment with a real database. 
 
 ## 🛠️ Preparation
 
@@ -62,6 +64,4 @@ If you modify the client's `.tsx` files, HMR will be triggered to update the cha
 
 ### React Component Rendered Twice?
 
-This happens in development mode if the app is wrapped in a `<React.StrictMode>` component. Remove it to fix the issue.
-
-Please go the entry file to remove it.
+During development, React's Strict Mode can cause double function calls. To resolve this, remove the `<React.StrictMode>` component from your app's entry file.

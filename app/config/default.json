@@ -44,8 +44,8 @@
   },
   "init": {
     "admin": {
-      "username": "admin@example.com",
-      "password": "your_password_here",
+      "username": "admin",
+      "password": "admin12345",
       "access": [
         "console:admins"
       ]

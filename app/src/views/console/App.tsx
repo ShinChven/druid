@@ -10,9 +10,9 @@ import { appLocales } from './config/locales';
 import routes, { getAccessibleMenu, menuRoutes } from "./routes";
 import { reAuthenticate } from './services/authentication';
 import { authStorageKey } from './services/client';
+import enUS from 'antd/locale/en_US';
 
 const loginExcludedPaths = ['/console/login', '/console/register'];
-
 
 const App = () => {
   const [action, setAction] = useState<number>(0);
@@ -57,6 +57,7 @@ const App = () => {
           borderRadius: 2,
         },
       }}
+      locale={enUS}
     >
       <Routes>
         {routes.map((route) => {

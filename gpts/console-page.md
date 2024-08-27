@@ -1,3 +1,10 @@
+## Instructions
+
+The assistant should help the user create a React page component in the style of the following template according to the RESTful resources or data model design provided by the user.
+
+## Code Template
+
+```tsx
 import { DeleteFilled, EditFilled, FormOutlined, SecurityScanOutlined } from "@ant-design/icons";
 import { ModalForm, ProColumns, ProFormText, ProTable } from "@ant-design/pro-components";
 import { Paginated } from "@feathersjs/feathers";
@@ -8,126 +15,6 @@ import { AdminModel } from "../../../../orm/declarations/admins";
 import pagination from "../../../../utils/pagination";
 import QueryParams, { CommonQueryParams } from "../../../common/query-params";
 import client from "../../services/client";
-
-
-export type Permission =
-  {
-    key: string;
-    name: string;
-    description: string;
-    checked?: boolean;
-  };
-
-export const PERMISSIONS: Permission[] = [
-  {
-    key: 'console:admins',
-    name: 'Manage users',
-    description: 'Manage system users',
-  },
-];
-
-const initPermissions = (admin: AdminModel) => {
-  // deep copy PERMISSIONS
-  const permissions = JSON.parse(JSON.stringify(PERMISSIONS));
-  for (const permission of permissions) {
-    permission.checked = admin.access?.includes(permission.key);
-  }
-  return permissions;
-};
-
-const initCheckAll = (permissions: Permission[]) => {
-  return permissions.every(permission => permission.checked);
-};
-
-const EditAdminAccess: React.FC<{ admin: AdminModel, onFinished?: () => void, trigger: React.ReactNode|string }> = ({ admin, onFinished, trigger }) => {
-  const [open, setOpen] = useState(false);
-  const [permissions, setPermissions] = useState<Permission[]>(initPermissions(admin));
-  const [checkAll, setCheckAll] = useState(initCheckAll(permissions));
-
-  const handleCheckAll = (checked: boolean) => {
-    const updatedPermissions = permissions.map(permission => ({
-      ...permission,
-      checked
-    }));
-    setPermissions(updatedPermissions);
-    setCheckAll(checked);
-  };
-
-  const handlePermissionChange = (key: string, checked: boolean) => {
-    const updatedPermissions = permissions.map(permission => {
-      if (permission.key === key) {
-        return {
-          ...permission,
-          checked
-        };
-      }
-      return permission;
-    });
-    setPermissions(updatedPermissions);
-    setCheckAll(updatedPermissions.every(permission => permission.checked));
-  };
-
-  const onFinish = async (values: any) => {
-    // patch access field of admin
-    const access = permissions.filter(permission => permission.checked).map(permission => permission.key);
-    try {
-      const result = await client.service('api/admins').patch(admin.id, { access: JSON.stringify(access) });
-      if (typeof result.id === "number") {
-        setOpen(false);
-        message.success('Permission updated');
-        onFinished?.();
-        return;
-      }
-    } catch (err) {
-      console.error(err);
-      message.error('Failed to update permission');
-    }
-  };
-
-  return <div>
-      <a onClick={() => setOpen(true)}>
-        {trigger}
-        </a>
-    <ModalForm
-      onFinish={onFinish}
-      layout="horizontal"
-      labelCol={{ span: 3 }}
-      open={open}
-      onAbort={() => setOpen(false)}
-      modalProps={{
-        onCancel: () => {
-          setOpen(false);
-        }
-      }}
-      title='Edit Permissions'
-    >
-      <Checkbox checked={checkAll} onChange={(e) => handleCheckAll(e.target.checked)}>Check all</Checkbox>
-      <Divider />
-      <div style={{
-        display: 'flex',
-        flexDirection: 'row',
-        gap: '0.5em',
-        flexWrap: 'wrap'
-      }}>
-        {
-          permissions.map(permission => {
-            return <Checkbox
-              key={permission.key}
-              checked={permission.checked}
-              onChange={(e) => handlePermissionChange(permission.key, e.target.checked)}
-            >
-              {permission.name}
-            </Checkbox>
-          })
-        }
-      </div>
-
-    </ModalForm>
-  </div>
-};
-
-
-
 
 const AdminEditor: React.FC<{
   admin?: AdminModel,
@@ -192,8 +79,6 @@ const AdminEditor: React.FC<{
         }
       ]} />
       <ProFormText name='name' label='Name' initialValue={admin?.name} required={true} rules={[{ required: true, message: 'Name is required' }]} />
-      <ProFormText name='email' label='Email' initialValue={admin?.email} required={true} rules={[{ required: true, message: 'Email is required' }]} />
-      <ProFormText name='mobile' label='Mobile' initialValue={admin?.mobile} required={true} rules={[{ required: true, message: 'Mobile is required' }]} />
     </ModalForm>
   </div>
 };
@@ -251,14 +136,6 @@ const Admins = () => {
       dataIndex: 'name',
     },
     {
-      title: 'Email',
-      dataIndex: 'email',
-    },
-    {
-      title: 'Mobile',
-      dataIndex: 'mobile',
-    },
-    {
       title: 'Options',
       valueType: 'option',
       width: 60,
@@ -267,9 +144,6 @@ const Admins = () => {
       render: (_, record) => {
         return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1em' }}>
           <AdminEditor key='edit' admin={record} trigger={<a><EditFilled /></a>} onFinished={() => setAction(action + 1)} />
-                     <EditAdminAccess trigger={<SecurityScanOutlined />} key='permission' admin={record} onFinished={() => {
-            setAction(action + 1);
-          }} />
           <a style={{ color: 'red' }}
             onClick={() => {
               Modal.confirm({
@@ -330,3 +204,4 @@ const Admins = () => {
 };
 
 export default Admins;
+```

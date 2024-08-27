@@ -57,26 +57,30 @@ export const menuRoutes: Array<MenuDataItem> = [
 
 ];
 
-export function getAccessibleMenu(routes: Array<MenuDataItem>, adminAccess: Array<string> = []) {
-  return routes.filter((route) => {
-    if (typeof route.access === 'string') {
-      if (!adminAccess?.includes(route.access)) {
-        return false;
-      }
+export function getAccessibleMenu(routes: Array<MenuDataItem>, adminAccess: Array<string> = []): Array<MenuDataItem> {
+  return routes.reduce((acc: Array<MenuDataItem>, route: MenuDataItem) => {
+    // Check if the current route is accessible
+    const isAccessible = !route.access || adminAccess.includes(route.access);
+
+    // Process children recursively, creating new objects
+    const accessibleChildren = route.children
+      ? getAccessibleMenu(route.children, adminAccess)
+      : [];
+
+    // If the route is accessible and has element or has any accessible children, add it to the result
+    if (isAccessible && (route.element || accessibleChildren.length > 0)) {
+      // Create a new object to avoid modifying the original
+      acc.push({ ...route, children: accessibleChildren }); 
     }
-    if (route.children) {
-      route.children = getAccessibleMenu(route.children, adminAccess);
-    }
-    return true;
-  });
+
+    return acc;
+  }, []);
 }
 
-
-type AppRoute = RouteObject & MenuDataItem & { layout?: boolean }
+type AppRoute = RouteObject & MenuDataItem & { layout?: boolean };
 
 const routes: Array<AppRoute> = (() => {
   const _routes: Array<AppRoute> = [];
-
 
   const loadRoute = (item: MenuDataItem) => {
     if (item.element) {
@@ -94,6 +98,6 @@ const routes: Array<AppRoute> = (() => {
   });
 
   return _routes;
-})()
+})();
 
 export default routes;
