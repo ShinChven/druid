@@ -39,8 +39,6 @@ export async function viteSSRMiddleware(app: Application) {
 
   app.use('*', async (req: Request, res: Response, next: NextFunction) => {
 
-
-
     try {
       const url = req.originalUrl;
       let template, render;
