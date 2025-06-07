@@ -1,7 +1,7 @@
 import ProLayout from '@ant-design/pro-layout';
 import { ConfigProvider } from 'antd';
 import { useEffect, useState } from 'react';
-import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Link, Route, Routes, useLocation, useNavigate } from "react-router";
 import { useConsoleData } from './ConsoleContext';
 import Forbidden from './components/Forbidden';
 import FullscreenSpinner from './components/FullscreenSpinner';

@@ -3,7 +3,7 @@ import { ModalForm, ProColumns, ProFormText, ProTable } from "@ant-design/pro-co
 import { Paginated } from "@feathersjs/feathers";
 import { Button, Checkbox, Divider, Form, Modal, message } from "antd";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { AdminModel } from "../../../../orm/declarations/admins";
 import pagination from "../../../../utils/pagination";
 import QueryParams, { CommonQueryParams } from "../../../common/query-params";

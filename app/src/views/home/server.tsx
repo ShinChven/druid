@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Helmet, HelmetData } from 'react-helmet';
-import { StaticRouter } from 'react-router-dom/server';
+import { StaticRouter } from 'react-router';
 import App from './App';
 import { DataProvider } from './context';
 import routes from './routes';
 
 export async function renderHtml(url: string, data: any): Promise<{ appHtml: string, helmet: HelmetData } | undefined> {
+  console.log('Rendering HTML for URL:', url);
+
   // check if no route found return undefined
   if (!routes.find(route => route.path === url)) {
     return undefined;

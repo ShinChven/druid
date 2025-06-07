@@ -5,7 +5,10 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [react()],
   ssr: {
-    noExternal: ['react-router-dom', 'node']
+    noExternal: [
+      'node', 
+      'turbo-stream'
+    ] // fix module type compatibility issue
   },
   publicDir: 'src/views/public',
   build: {

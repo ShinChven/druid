@@ -2,7 +2,7 @@ import { ProForm } from '@ant-design/pro-components';
 import { ProFormText } from '@ant-design/pro-form';
 import { Button, Card, message } from 'antd';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { useConsoleData } from '../ConsoleContext';
 import { appLocales } from '../config/locales';
 import { IAuthenticationResponse, authenticate } from '../services/authentication';

@@ -1,7 +1,7 @@
 import { Application } from '@feathersjs/feathers';
 import bcrypt from 'bcryptjs';
 
-async function hashPassword(password: string): Promise<string> {
+async function hashPassword(password: string): Promise<string | undefined> {
   const saltRounds = 10;
   return await new Promise((resolve, reject) => {
     bcrypt.hash(password, saltRounds, function (err, hash) {

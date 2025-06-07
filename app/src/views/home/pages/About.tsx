@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { useData } from "../context";
 import styles from "./About.module.less";
 

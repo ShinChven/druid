@@ -1,6 +1,6 @@
 import { HomeOutlined, InfoCircleFilled, SettingFilled } from "@ant-design/icons";
 import { MenuDataItem } from "@ant-design/pro-components";
-import { RouteObject } from "react-router-dom";
+import { RouteObject } from "react-router";
 import Forbidden from "./components/Forbidden";
 import About from "./pages/About";
 import Admins from "./pages/AdminArea/Admins";
