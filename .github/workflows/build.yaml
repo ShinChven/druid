@@ -29,7 +29,7 @@ jobs:
           ls -lh
 
       - name: Upload Package Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: druid
           path: druid.tar.gz
